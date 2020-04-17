@@ -1,8 +1,70 @@
 spring:
+  thymeleaf:
+    cache: false
   datasource:
-    url: jdbc:mysql://localhost:3306/simplemall?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
+    url: jdbc:mysql://localhost:3306/seckill?useUnicode=true&characterEncoding=utf-8&allowMultiQueries=true&useSSL=false
     username: root
     password: 12345678
     driver-class-name: com.mysql.cj.jdbc.Driver
-
+    type: com.alibaba.druid.pool.DruidDataSource
+    tomcat:
+      max-active: 1000
+      initial-size: 100
+      max-wait: 60000
+      min-idle: 500
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 'x'
+      test-while-idle: true
+      test-on-borrow: true
+      test-on-return: true
+    dbcp2:
+      pool-prepared-statements: true
+      max-open-prepared-statements: 20
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    timeout: 10
+    jedis:
+      pool:
+        max-active: 1000
+        max-idle: 500
+        max-wait: 500
+  resources:
+    add-mappings: true
+    cache:
+      period: 3600
+    chain:
+      cache: true
+      enabled: true
+      html-application-cache: true
+      compressed: true
+    static-locations: classpath:/static/
+  ##RabbitMQ
+#  rabbitmq:
+#    host: 127.0.0.1
+#    port: 5672
+#    username: guest
+#    password: guest
+#    virtual-host: /
+#    listener:
+#      simple:
+#        concurrency: 10
+#        max-concurrency: 10
+#        prefetch: 1
+#        auto-startup: true
+#        default-requeue-rejected: true
+#    template:
+#      retry:
+#        enabled: true
+#        initial-interval: 1000
+#        max-attempts: 3
+#        max-interval: 10000
+#        multiplier: 1.0
+mybatis:
+  type-aliases-package: com.tanyu.seckill.mapper
+  configuration:
+    map-underscore-to-camel-case: true
+    default-fetch-size: 100
+    default-statement-timeout: 3000
 

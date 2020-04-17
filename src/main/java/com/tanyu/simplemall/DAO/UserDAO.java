@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 @Mapper
 @Repository
 public interface UserDAO {
-    @Select("select * from tb_user where name = #{name}")
-    User getUserByName(@Param("name") String name);
+
+    @Select("select * from sk_user where id = #{id}")
+    User getUserById(@Param("id") long id);
 }
